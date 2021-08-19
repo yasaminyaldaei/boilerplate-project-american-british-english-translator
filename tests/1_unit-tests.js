@@ -34,7 +34,7 @@ suite('Unit Tests', () => {
 
     //5
     test("Translate The parking lot was full. to British English",  function(done) {
-        assert.equal("The car park was full.", translator.translate("The parking lot was full", A_TO_B));
+        assert.equal("The car park was full.", translator.translate("The parking lot was full.", A_TO_B));
         done();
     })
 
@@ -117,38 +117,38 @@ suite('Unit Tests', () => {
     })
 
     //19
-    test("Translate Mangoes are my favorite fruit. to British English",  function(done) {
-        assert.equal("Mangoes are my favourite fruit", translator.translate("Mangoes are my favorite fruit", B_TO_A));
+    test("Translate Prof Joyner of King's College, London. to American English",  function(done) {
+        assert.equal("Mangoes are my favourite fruit", translator.translate("Prof. Joyner of King's College, London.", B_TO_A));
         done();
     })
 
     //20
-    test("Translate I ate yogurt for breakfast. to British English", function(done) {
-        assert.equal("", translator.translate("I ate yogurt for breakfast.", B_TO_A));
+    test("Translate Tea time is usually around 4 or 4.30. to American English", function(done) {
+        assert.equal("Tea time is usually around 4 or 4:30.", translator.translate("Tea time is usually around 4 or 4.30.", B_TO_A));
         done();
     })
 
     //21
-    test("Translate Mangoes are my favorite fruit. to British English",  function(done) {
-        assert.equal("Mangoes are my favourite fruit", translator.translate("Mangoes are my favorite fruit", A_TO_B));
+    test("Highlight translation in Mangoes are my favorite fruit.",  function(done) {
+        assert.equal('Mangoes are my <span class="highlight">favourite</span> fruit.', translator.translate("Mangoes are my favorite fruit.", A_TO_B));
         done();
     })
 
     //22
-    test("Translate I ate yogurt for breakfast. to British English", function(done) {
-        assert.equal("", translator.translate("I ate yogurt for breakfast.", A_TO_B));
+    test("Highlight translation in I ate yogurt for breakfast.", function(done) {
+        assert.equal('I ate <span class="highlight">yoghurt</span> for breakfast.', translator.translate("I ate yogurt for breakfast.", A_TO_B));
         done();
     })
 
     //23
-    test("Translate I ate yogurt for breakfast. to British English", function(done) {
-        assert.equal("", translator.translate("I ate yogurt for breakfast.", A_TO_B));
+    test("Highlight translation in We watched the footie match for a while.", function(done) {
+        assert.equal('We watched the <span class="highlight">soccer</span> match for a while.', translator.translate("We watched the footie match for a while.", B_TO_A));
         done();
     })
 
     //24
-    test("Translate I ate yogurt for breakfast. to British English", function(done) {
-        assert.equal("", translator.translate("I ate yogurt for breakfast.", A_TO_B));
+    test("Highlight translation in Paracetamol takes up to an hour to work.", function(done) {
+        assert.equal('<span class="highlight">Tylenol</span> takes up to an hour to work.', translator.translate("Paracetamol takes up to an hour to work.", A_TO_B));
         done();
     })
 });
