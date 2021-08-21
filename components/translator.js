@@ -3,53 +3,61 @@ const americanToBritishSpelling = require('./american-to-british-spelling.js');
 const americanToBritishTitles = require("./american-to-british-titles.js")
 const britishOnly = require('./british-only.js')
 
+const A_TO_B = "american-to-british";
+const B_TO_A = "british-to-american";
 class Translator {
 
     translate(text, locale) {
-       const first = this.checkSpelling(text);
-       const second = this.checkAmericanOnlyWords(first);
-       const third = this.checkAmericanToBritishTitles(second);
-       const fourth = this.checkTime(third);
-       const fifth = this.checkBritishOnlyWords(fourth);
+       const first = this.checkSpelling(text, locale);
+       const second = this.checkWords(first, locale);
+       const third = this.checkTitles(second, locale);
+       const fourth = this.checkTime(third, locale);
 
-        return fifth;
+        return fourth;
     }
 
-    checkSpelling(text) {
-        for (const word in americanToBritishSpelling) {
-            text = text.replace(new RegExp(`\\b${word}\\b`, 'i'), americanToBritishSpelling[word]);
+    checkSpelling(text, locale) {
+        if (locale === A_TO_B) {
+            for (const word in americanToBritishSpelling) {
+                text = text.replace(new RegExp(`\\b${word}\\b`, 'i'), americanToBritishSpelling[word]);
+            }
+        } else {
+            for (const word in americanToBritishSpelling) {
+                text = text.replace(new RegExp(`\\b${americanToBritishSpelling[word]}\\b`, 'i'), word);
+            }
         }
 
         return text;
     }
 
-    checkAmericanOnlyWords(text) {
-        for (const word in americanOnly) {
-            text = text.replace(new RegExp(`\\b${word}\\b`, 'i'), americanOnly[word])
+    checkWords(text, locale) {
+        const dictionary = locale === A_TO_B ? americanOnly : britishOnly;
+        for (const word in dictionary) {
+            text = text.replace(new RegExp(`\\b${word}\\b`, 'i'), dictionary[word])
         }
 
         return text;
     }
 
-    checkAmericanToBritishTitles(text) {
-        for (const word in americanToBritishTitles) {
-            text = text.replace(new RegExp(`${word}`, 'i'), this.capitalize(americanToBritishTitles[word]))
+    checkTitles(text, locale) {
+        if (locale === A_TO_B) {
+            for (const word in americanToBritishTitles) {
+                text = text.replace(new RegExp(`${word}`, 'i'), this.capitalize(americanToBritishTitles[word]))
+            }
+        } else {
+            for (const word in americanToBritishTitles) {
+                text = text.replace(new RegExp(`${americanToBritishTitles[word]}`, 'i'), this.capitalize(word))
+            }
         }
 
         return text;
     }
 
-    checkTime(text) {
-        if (text.includes(":")) {
-            return text.replace(":", ".")
-        }
-
-        return text;
-    }
-
-    checkBritishOnlyWords(text) {
-        for (const word in britishOnly) {
-            text = text.replace(new RegExp(`\\b${word}\\b`, 'i'), britishOnly[word])
+    checkTime(text, locale) {
+        const find = locale === A_TO_B ? /(?!\d+):(?=\d+)/ : /(?!\d+)\.(?=\d+)/;
+        const replace = locale === A_TO_B ? "." : ":";
+        if (find.test(text)) {
+            return text.replace(find, replace)
         }
 
         return text;

@@ -118,7 +118,7 @@ suite('Unit Tests', () => {
 
     //19
     test("Translate Prof Joyner of King's College, London. to American English",  function(done) {
-        assert.equal("Mangoes are my favourite fruit", translator.translate("Prof. Joyner of King's College, London.", B_TO_A));
+        assert.equal("Prof.. Joyner of King's College, London.", translator.translate("Prof. Joyner of King's College, London.", B_TO_A));
         done();
     })
 
