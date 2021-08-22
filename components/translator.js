@@ -42,11 +42,11 @@ class Translator {
     checkTitles(text, locale) {
         if (locale === A_TO_B) {
             for (const word in americanToBritishTitles) {
-                text = text.replace(new RegExp(`${word}`, 'i'), this.capitalize(americanToBritishTitles[word]))
+                text = text.replace(new RegExp(`\\b${word}\\B`, 'i'), this.capitalize(americanToBritishTitles[word]))
             }
         } else {
             for (const word in americanToBritishTitles) {
-                text = text.replace(new RegExp(`${americanToBritishTitles[word]}`, 'i'), this.capitalize(word))
+                text = text.replace(new RegExp(`\\b${americanToBritishTitles[word]}\\b`, 'i'), this.capitalize(word))
             }
         }
 
