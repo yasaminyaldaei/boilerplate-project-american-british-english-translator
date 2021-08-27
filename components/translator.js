@@ -33,7 +33,7 @@ class Translator {
     checkWords(text, locale) {
         const dictionary = locale === A_TO_B ? americanOnly : britishOnly;
         for (const word in dictionary) {
-            text = text.replace(new RegExp(`\\b${word}\\b`, 'i'), dictionary[word])
+            text = text.replace(new RegExp(`\\b(?<=\\s|^)${word}(?=\\s?)\\b`, 'i'), dictionary[word])
         }
 
         return text;
