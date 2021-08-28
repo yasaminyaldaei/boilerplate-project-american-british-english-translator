@@ -130,25 +130,25 @@ suite('Unit Tests', () => {
 
     //21
     test("Highlight translation in Mangoes are my favorite fruit.",  function(done) {
-        assert.equal('Mangoes are my <span class="highlight">favourite</span> fruit.', translator.translate("Mangoes are my favorite fruit.", A_TO_B));
+        assert.equal('Mangoes are my <span class="highlight">favourite</span> fruit.', translator.translate("Mangoes are my favorite fruit.", A_TO_B, true));
         done();
     })
 
     //22
     test("Highlight translation in I ate yogurt for breakfast.", function(done) {
-        assert.equal('I ate <span class="highlight">yoghurt</span> for breakfast.', translator.translate("I ate yogurt for breakfast.", A_TO_B));
+        assert.equal('I ate <span class="highlight">yoghurt</span> for breakfast.', translator.translate("I ate yogurt for breakfast.", A_TO_B, true));
         done();
     })
 
     //23
     test("Highlight translation in We watched the footie match for a while.", function(done) {
-        assert.equal('We watched the <span class="highlight">soccer</span> match for a while.', translator.translate("We watched the footie match for a while.", B_TO_A));
+        assert.equal('We watched the <span class="highlight">soccer</span> match for a while.', translator.translate("We watched the footie match for a while.", B_TO_A, true));
         done();
     })
 
     //24
     test("Highlight translation in Paracetamol takes up to an hour to work.", function(done) {
-        assert.equal('<span class="highlight">Tylenol</span> takes up to an hour to work.', translator.translate("Paracetamol takes up to an hour to work.", A_TO_B));
+        assert.equal('<span class="highlight">Tylenol</span> takes up to an hour to work.', translator.translate("Paracetamol takes up to an hour to work.", B_TO_A, true));
         done();
     })
 });
