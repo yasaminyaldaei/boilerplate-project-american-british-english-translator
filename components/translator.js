@@ -7,6 +7,11 @@ const A_TO_B = "american-to-british";
 const B_TO_A = "british-to-american";
 class Translator {
 
+    constructor() {
+        this.americanToBritish = A_TO_B;
+        this.britishToAmerican = B_TO_A;
+    }
+
     translate(text, locale, highlight) {
        const first = this.checkSpelling(text, locale, highlight);
        const second = this.checkWords(first, locale, highlight);
