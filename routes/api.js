@@ -14,6 +14,15 @@ module.exports = function (app) {
       const locale = req.body.locale;
 
       try {
+        assert.notStrictEqual(text, undefined, "Required field(s) missing")
+        assert.notStrictEqual(locale, undefined, "Required field(s) missing")
+      } catch ({ message: error }) {
+        return res.json({
+          error
+        })
+      }
+
+      try {
         assert.ok(text, "No text to translate")
       } catch ({ message: error }) {
         return res.json({
@@ -30,6 +39,15 @@ module.exports = function (app) {
       }
 
       const translation = translator.translate(text, locale);
+
+      try {
+        assert.notStrictEqual(translation, text)
+      } catch (err) {
+        return res.json({
+          text,
+          translation: "Everything looks good to me!"
+        })
+      }
 
       return res.json({
         text,

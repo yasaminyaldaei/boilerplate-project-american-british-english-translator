@@ -64,7 +64,7 @@ suite('Functional Tests', () => {
             assert.property(res.body, "error");
             assert.equal(
               res.body.error,
-              "No text to translate"
+              "Required field(s) missing"
             );
             done();
           });
@@ -74,15 +74,14 @@ suite('Functional Tests', () => {
           .request(server)
           .post("/api/translate")
           .send({
-            puzzle:
-              "1.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.",
+            text: textToTranslate,
           })
           .end(function (err, res) {
             assert.equal(res.status, 200);
-            assert.property(res.body, "solution");
+            assert.property(res.body, "error");
             assert.equal(
-              res.body.solution,
-              "135762984946381257728459613694517832812936745357824196473298561581673429269145378"
+              res.body.error,
+              "Required field(s) missing"
             );
             done();
           });
@@ -92,15 +91,15 @@ suite('Functional Tests', () => {
           .request(server)
           .post("/api/translate")
           .send({
-            puzzle:
-              "1.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.",
+            text: "",
+            locale: A_TO_B,
           })
           .end(function (err, res) {
             assert.equal(res.status, 200);
-            assert.property(res.body, "solution");
+            assert.property(res.body, "error");
             assert.equal(
-              res.body.solution,
-              "135762984946381257728459613694517832812936745357824196473298561581673429269145378"
+              res.body.error,
+              "No text to translate"
             );
             done();
           });
@@ -110,16 +109,22 @@ suite('Functional Tests', () => {
           .request(server)
           .post("/api/translate")
           .send({
-            puzzle:
-              "1.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.",
+            text:
+              "Mangoes are my favourite fruit.",
+            locale:A_TO_B,
           })
           .end(function (err, res) {
             assert.equal(res.status, 200);
-            assert.property(res.body, "solution");
+            assert.property(res.body, "text");
+            assert.property(res.body, "translation");
             assert.equal(
-              res.body.solution,
-              "135762984946381257728459613694517832812936745357824196473298561581673429269145378"
+              res.body.text,
+              "Mangoes are my favourite fruit."
             );
+            assert.equal(
+                res.body.translation,
+                "Everything looks good to me!"
+              );
             done();
           });
       });
