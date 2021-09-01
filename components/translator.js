@@ -59,8 +59,8 @@ class Translator {
     }
 
     checkTime(text, locale, highlight) {
-        const find = locale === A_TO_B ? /(?!\d+):(?=\d+)/ : /(?!\d+)\.(?=\d+)/;
-        const replace = locale === A_TO_B ? "." : ":";
+        const find = locale === A_TO_B ? /(\d+)(:)(\d+)/ : /(\d+)(\.)(\d+)/;
+        const replace = locale === A_TO_B ? "$1.$3" : "$1:$3";
         if (find.test(text)) {
             return text.replace(find, this.textToReplace(replace, highlight))
         }
