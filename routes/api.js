@@ -38,7 +38,7 @@ module.exports = function (app) {
         })
       }
 
-      const translation = translator.translate(text, locale);
+      const translation = translator.translate(text, locale, true);
 
       try {
         assert.notStrictEqual(translation, text)

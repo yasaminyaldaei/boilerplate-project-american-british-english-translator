@@ -9,7 +9,7 @@ let Translator = require('../components/translator.js');
 const translator = new Translator();
 
 const textToTranslate = "Mangoes are my favorite fruit."
-const translation = "Mangoes are my favourite fruit."
+const translation = 'Mangoes are my <span class="highlight">favourite</span> fruit.'
 const A_TO_B = "american-to-british";
 const B_TO_A = "british-to-american";
 
